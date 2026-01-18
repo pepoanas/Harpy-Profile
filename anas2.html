@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Harpy Profile</title>
+  <link rel="icon" href="https://i.ibb.co/hF6yBD8S/819327-blacksnowflake.gif  " type="image/gif" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('https://i.ibb.co/B27c7dm4/image.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: "Cambria Math", serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    .card {
+      position: relative;
+      width: 400px;
+      padding: 45px;
+      background: rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(14px);
+      border-radius: 28px;
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.45);
+      text-align: center;
+      transform-style: preserve-3d;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s forwards 0.3s;
+    }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255, 255, 255, 0.9);
+      margin: 0 auto 26px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+      70% { box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+    }
+
+    .name {
+      font-size: 34px;
+      margin: 14px 0;
+      letter-spacing: 1.3px;
+      animation: slideIn 0.8s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* === الشارات - أيقونات فقط، بدون نص === */
+    .badges {
+      margin: 22px 0;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .badge-item {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      overflow: visible;
+    }
+
+    .badge-item:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px) scale(1.08);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    .badge-item img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+    }
+
+    /* === تسمية تظهر عند التحويم === */
+    .badge-item::after {
+      content: attr(data-name);
+      position: absolute;
+      bottom: -32px;
+      left: 50%;
+      transform: translateX(-50%) scale(0.9);
+      opacity: 0;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      text-shadow: 
+        0 0 6px rgba(255, 255, 255, 0.9),
+        0 0 12px rgba(255, 255, 255, 0.7),
+        0 2px 4px rgba(0, 0, 0, 0.4);
+      transition: all 0.25s ease;
+      pointer-events: none;
+    }
+
+    .badge-item:hover::after {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+
+    .typing-text {
+      font-size: 19px;
+      margin: 22px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #fff;
+      width: 0;
+      animation: typing 3s steps(10, end) forwards 1s;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    .social-icons {
+      margin-top: 26px;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      margin: 0 14px;
+      font-size: 30px;
+      color: white;
+      text-decoration: none;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.3);
+    }
+
+    .social-icons a.twitter:hover {
+      color: #1da1f2;
+    }
+
+    .social-icons a.discord:hover {
+      color: #5865F2;
+    }
+
+    /* === أيقونة السماعة === */
+    .headphone-icon {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+      transition: transform 0.2s ease, filter 0.2s ease;
+      z-index: 10;
+    }
+
+    .headphone-icon:hover {
+      transform: scale(1.15);
+      filter: drop-shadow(0 2px 6px rgba(255,255,255,0.6));
+    }
+
+    #audio-player {
+      display: none;
+    }
+
+    /* === نبض فخم من الأطراف === */
+    .fancy-pulse {
+      position: absolute;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0;
+    }
+
+    .fancy-pulse.top {
+      top: -8px;
+      left: 10%;
+      width: 80%;
+      height: 4px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent);
+      box-shadow: 0 0 12px 4px rgba(255,255,255,0.6),
+                  0 0 24px 8px rgba(0,0,0,0.2);
+      animation: pulseGlowTop 1.2s ease-out forwards;
+    }
+
+    .fancy-pulse.bottom {
+      bottom: -8px;
+      left: 10%;
+      width: 80%;
+      height: 4px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent);
+      box-shadow: 0 0 12px 4px rgba(255,255,255,0.6),
+                  0 0 24px 8px rgba(0,0,0,0.2);
+      animation: pulseGlowBottom 1.2s ease-out forwards;
+    }
+
+    .fancy-pulse.left {
+      left: -8px;
+      top: 10%;
+      height: 80%;
+      width: 4px;
+      border-radius: 2px;
+      background: linear-gradient(0deg, transparent, rgba(255,255,255,0.9), transparent);
+      box-shadow: 0 0 12px 4px rgba(255,255,255,0.6),
+                  0 0 24px 8px rgba(0,0,0,0.2);
+      animation: pulseGlowLeft 1.2s ease-out forwards;
+    }
+
+    .fancy-pulse.right {
+      right: -8px;
+      top: 10%;
+      height: 80%;
+      width: 4px;
+      border-radius: 2px;
+      background: linear-gradient(0deg, transparent, rgba(255,255,255,0.9), transparent);
+      box-shadow: 0 0 12px 4px rgba(255,255,255,0.6),
+                  0 0 24px 8px rgba(0,0,0,0.2);
+      animation: pulseGlowRight 1.2s ease-out forwards;
+    }
+
+    @keyframes pulseGlowTop { 0% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1.5) translateY(-20px); opacity: 0; } }
+    @keyframes pulseGlowBottom { 0% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1.5) translateY(20px); opacity: 0; } }
+    @keyframes pulseGlowLeft { 0% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1.5) translateX(-20px); opacity: 0; } }
+    @keyframes pulseGlowRight { 0% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1.5) translateX(20px); opacity: 0; } }
+  </style>
+</head>
+<body>
+
+<audio id="audio-player" src="https://files.catbox.moe/zv13pi.mp3" loop></audio>
+
+<div class="card" id="tiltCard">
+  <img src="https://i.ibb.co/9mHwbhGc/headphone.png" alt="Music" class="headphone-icon" id="headphoneBtn" />
+
+  <img src="https://i.ibb.co/VYXLGgMC/image.jpg" alt="Profile" class="profile-pic" />
+
+  <div class="name">ℎ𝑎𝑟𝑝𝑦</div>
+
+  <div class="badges">
+    <div class="badge-item" data-name="Verified">
+      <img src="https://i.ibb.co/39PfqK97/931838-earlyverifiedbotdeveloperblack.png" alt="Verified" />
+    </div>
+    <div class="badge-item" data-name="Snowflake">
+      <img src="https://i.ibb.co/hF6yBD8S/819327-blacksnowflake.gif" alt="Snowflake" />
+    </div>
+    <div class="badge-item" data-name="Pixel Bat">
+      <img src="https://i.ibb.co/Lh2BhRwx/48789-black-pixel-bat-goomy.png" alt="Pixel Bat" />
+    </div>
+  </div>
+
+  <div class="typing-text">I love Me</div>
+
+  <div class="social-icons">
+    <a href="https://twitter.com/yourusername" class="twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+    <a href="https://discord.com/users/yourid" class="discord" target="_blank"><i class="fab fa-discord"></i></a>
+  </div>
+</div>
+
+<script>
+  // === تحكم الحركة + النبض ===
+  const card = document.getElementById('tiltCard');
+  let lastPulseTime = 0;
+
+  function createFancyPulse() {
+    const now = Date.now();
+    if (now - lastPulseTime < 400) return;
+    lastPulseTime = now;
+
+    ['top', 'bottom', 'left', 'right'].forEach(dir => {
+      const pulse = document.createElement('div');
+      pulse.className = `fancy-pulse ${dir}`;
+      card.appendChild(pulse);
+      setTimeout(() => pulse.remove(), 1200);
+    });
+  }
+
+  document.body.style.perspective = '1000px';
+
+  // تحسين: التفاعل فقط عند التحويم على الكارت
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const rotateY = ((e.clientX - (rect.left + rect.width / 2)) / rect.width) * 20;
+    const rotateX = (((rect.top + rect.height / 2) - e.clientY) / rect.height) * 20;
+    card.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+    card.style.transition = 'transform 0.08s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    createFancyPulse();
+  });
+
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    card.style.transition = 'transform 0.4s ease-out';
+  });
+
+  // === تحكم الصوت ===
+  const audio = document.getElementById('audio-player');
+  const headphoneBtn = document.getElementById('headphoneBtn');
+
+  audio.volume = 1.0;
+
+  headphoneBtn.addEventListener('click', () => {
+    if (audio.paused) {
+      audio.play().catch(e => console.log("التشغيل مؤجل حتى تفاعل المستخدم:", e));
+      headphoneBtn.style.filter = 'drop-shadow(0 2px 8px rgba(0,255,255,0.8))';
+    } else {
+      audio.pause();
+      headphoneBtn.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.4))';
+    }
+  });
+</script>
+
+</body>
+</html>
